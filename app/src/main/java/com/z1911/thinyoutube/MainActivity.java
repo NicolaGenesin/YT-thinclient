@@ -4,17 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
+import com.z1911.thinyoutube.Fragments.YoutubeListFragment;
+import com.z1911.thinyoutube.Models.Song;
+
 import java.util.List;
 
 
 public class MainActivity extends FragmentActivity {
-
-    private List<Song> songs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,7 @@ public class MainActivity extends FragmentActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        MainActivityFragment fragment = new MainActivityFragment();
+        YoutubeListFragment fragment = new YoutubeListFragment();
         fragmentTransaction.add(R.id.container, fragment);
         fragmentTransaction.commit();
 

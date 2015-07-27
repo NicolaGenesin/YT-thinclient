@@ -1,4 +1,4 @@
-package com.z1911.thinyoutube;
+package com.z1911.thinyoutube.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,24 +9,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.z1911.thinyoutube.Transformations.ImageBlurTransformation;
+import com.z1911.thinyoutube.R;
+import com.z1911.thinyoutube.Models.Song;
 
 import java.util.List;
 
 /**
  * Created by nicola on 27/07/2015.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.ViewHolder> {
     private List<Song> itemsData;
     private Context context;
 
-    public MyAdapter(Context context, List<Song> itemsData) {
+    public YoutubeRVAdapter(Context context, List<Song> itemsData) {
         this.context = context;
         this.itemsData = itemsData;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public YoutubeRVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext())
