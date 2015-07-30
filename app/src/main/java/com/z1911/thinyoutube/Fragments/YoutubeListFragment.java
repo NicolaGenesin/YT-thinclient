@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.z1911.thinyoutube.Adapters.YoutubeRVAdapter;
+import com.z1911.thinyoutube.MainActivity;
 import com.z1911.thinyoutube.Models.SearchResult;
 import com.z1911.thinyoutube.Network.Const;
 import com.z1911.thinyoutube.Network.IYoutubeService;
@@ -48,14 +49,9 @@ public class YoutubeListFragment extends Fragment {
         mAdapter = new YoutubeRVAdapter(getActivity(),mSongList);
         recyclerView.setAdapter(mAdapter);
 
-
-
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(Const.Youtube)
-                .build();
-
-        IYoutubeService service = restAdapter.create(IYoutubeService.class);
-        service.getYoutubeList("massive attack", Const.API_KEY, new Callback<SearchResult>() {
+        // todo move call to a dedicated yt-retrofit client, then register with otto
+        // https://github.com/pat-dalberg/ImageNom/blob/master/src/com/dalberg/android/imagenom/async/FlickrClient.java
+        MainActivity.getApiService().getYoutubeList("massive attack", Const.API_KEY, new Callback<SearchResult>() {
             @Override
             public void success(SearchResult o, Response response) {
 

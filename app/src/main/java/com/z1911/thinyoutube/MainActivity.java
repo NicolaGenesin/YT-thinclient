@@ -8,39 +8,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.z1911.thinyoutube.Fragments.YoutubeListFragment;
-import com.z1911.thinyoutube.Models.SearchResult;
-import com.z1911.thinyoutube.Models.Song;
 import com.z1911.thinyoutube.Network.Const;
 import com.z1911.thinyoutube.Network.IYoutubeService;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class MainActivity extends FragmentActivity {
+
+    private static IYoutubeService mApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        YoutubeListFragment fragment = new YoutubeListFragment();
-        fragmentTransaction.add(R.id.container, fragment);
-        fragmentTransaction.commit();
-
+        CreateApiClient();
+        ManageFragments();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,4 +55,24 @@ public class MainActivity extends FragmentActivity {
     // you want to use the same images.
 
 
+    private void ManageFragments() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        YoutubeListFragment fragment = new YoutubeListFragment();
+        fragmentTransaction.add(R.id.container, fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void CreateApiClient() {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(Const.Youtube)
+                .build();
+
+        mApi = restAdapter.create(IYoutubeService.class);
+    }
+
+    public static IYoutubeService getApiService() {
+        return mApi;
+    }
 }
