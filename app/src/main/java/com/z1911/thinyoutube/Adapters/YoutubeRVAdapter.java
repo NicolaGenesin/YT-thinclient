@@ -48,7 +48,7 @@ public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.View
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
 
-        viewHolder.txtViewTitle.setText(itemsData.get(position).name);
+        viewHolder.txtViewTitle.setText(itemsData.get(position).title);
 
         Picasso.with(context).
                 load(itemsData.get(position).coverImageUrlLocation).
