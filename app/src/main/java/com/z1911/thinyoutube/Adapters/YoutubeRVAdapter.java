@@ -52,13 +52,12 @@ public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.View
 
         Picasso.with(context).
                 load(itemsData.get(position).coverImageUrlLocation).
-                transform(new ImageBlurTransformation()).
+                //transform(new ImageBlurTransformation()).
                 into(viewHolder.blurredBackgroundImage);
 
-        Picasso.with(context).
-                load(itemsData.get(position).coverImageUrlLocation).
-                //transform(new ImageCircleCropTransformation(1000,0)).
-                into(viewHolder.backgroundImage);
+//        Picasso.with(context).
+//                load(itemsData.get(position).coverImageUrlLocation).
+//                into(viewHolder.backgroundImage);
     }
 
 

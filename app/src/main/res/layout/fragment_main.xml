@@ -9,4 +9,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <RelativeLayout
+        android:background="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/searchText"
+                android:layout_weight="0.75" />
+
+            <ImageView
+                android:src="@drawable/abc_ic_go_search_api_mtrl_alpha"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/searchButton"
+                android:layout_weight="0.25" />
+        </LinearLayout>
+    </RelativeLayout>
+
 </RelativeLayout>
