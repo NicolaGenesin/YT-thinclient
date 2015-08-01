@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.z1911.thinyoutube.Transformations.ImageBlurTransformation;
-import com.z1911.thinyoutube.R;
 import com.z1911.thinyoutube.Models.Song;
+import com.z1911.thinyoutube.R;
+import com.z1911.thinyoutube.Transformations.ImageBlurTransformation;
 import com.z1911.thinyoutube.Transformations.ImageCircleCropTransformation;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by nicola on 27/07/2015.
  */
-public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.ViewHolder> {
+public class YoutubeRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Song> itemsData;
     private Context context;
 
@@ -28,11 +28,25 @@ public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.View
         this.itemsData = itemsData;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        // Just as an example, return 0 or 2 depending on position
+        // Note that unlike in ListView adapters, types don't have to be contiguous
+        if (position == 0)
+            return 0;
+        return 1;
+    }
+
     // Create new views (invoked by the layout manager)
     @Override
-    public YoutubeRVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
-        // create a new view
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
+
+
+        if (viewType == 0) {
+            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_row, parent, false));
+        }
+
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.song_row, null);
 
@@ -42,24 +56,30 @@ public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.View
         return viewHolder;
     }
 
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
 
-        viewHolder.txtViewTitle.setText(itemsData.get(position).title);
+        if (position > 0) {
+            ViewHolder view = (ViewHolder) viewHolder;
 
-        Picasso.with(context).
-                load(itemsData.get(position).coverImageUrlLocation).
-                transform(new ImageBlurTransformation()).
-                into(viewHolder.blurredBackgroundImage);
+            view.txtViewTitle.setText(itemsData.get(position).title);
 
-        Picasso.with(context).
-                load(itemsData.get(position).coverImageUrlLocation).
-                transform(new ImageCircleCropTransformation()).
-                into(viewHolder.backgroundImage);
+            Picasso.with(context).
+                    load(itemsData.get(position).coverImageUrlLocation).
+                    transform(new ImageBlurTransformation()).
+                    into(view.blurredBackgroundImage);
+
+            Picasso.with(context).
+                    load(itemsData.get(position).coverImageUrlLocation).
+                    transform(new ImageCircleCropTransformation()).
+                    into(view.backgroundImage);
+        }
+
     }
 
 
@@ -84,4 +104,5 @@ public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.View
             backgroundImage = (ImageView) itemLayoutView.findViewById(R.id.backGroundImage);
         }
     }
+
 }

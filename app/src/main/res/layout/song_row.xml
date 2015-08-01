@@ -20,8 +20,6 @@
             android:scaleType="centerCrop"
             android:src="@drawable/abc_ic_go_search_api_mtrl_alpha" />
 
-
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

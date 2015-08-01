@@ -115,6 +115,7 @@ public class YoutubeListFragment extends Fragment {
 
                 List<Song> songs = new ArrayList<Song>() {
                 };
+                songs.add(new Song()); //todo dummy song
                 for (SearchResult.ItemsEntity rawItem : searchResult.getItems()) {
                     Song tmp = new Song();
                     tmp.videoId = rawItem.getId().getVideoId();
