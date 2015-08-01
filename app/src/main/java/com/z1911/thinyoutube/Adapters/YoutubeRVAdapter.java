@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import com.z1911.thinyoutube.Transformations.ImageBlurTransformation;
 import com.z1911.thinyoutube.R;
 import com.z1911.thinyoutube.Models.Song;
+import com.z1911.thinyoutube.Transformations.ImageCircleCropTransformation;
 
 import java.util.List;
 
@@ -52,12 +53,13 @@ public class YoutubeRVAdapter extends RecyclerView.Adapter<YoutubeRVAdapter.View
 
         Picasso.with(context).
                 load(itemsData.get(position).coverImageUrlLocation).
-                //transform(new ImageBlurTransformation()).
+                transform(new ImageBlurTransformation()).
                 into(viewHolder.blurredBackgroundImage);
 
-//        Picasso.with(context).
-//                load(itemsData.get(position).coverImageUrlLocation).
-//                into(viewHolder.backgroundImage);
+        Picasso.with(context).
+                load(itemsData.get(position).coverImageUrlLocation).
+                transform(new ImageCircleCropTransformation()).
+                into(viewHolder.backgroundImage);
     }
 
 

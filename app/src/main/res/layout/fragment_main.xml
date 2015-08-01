@@ -10,7 +10,7 @@
         android:layout_height="match_parent" />
 
     <RelativeLayout
-        android:background="#666666"
+        android:background="#55666666"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentTop="true"
@@ -21,6 +21,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:weightSum="1"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true">
 
@@ -28,15 +29,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/searchText"
-                android:layout_weight="0.75" />
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:layout_weight="0.8" />
 
             <ImageView
-                android:src="@drawable/abc_ic_go_search_api_mtrl_alpha"
+                android:src="@drawable/abc_btn_radio_material"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/searchButton"
-                android:layout_weight="0.25" />
+                android:layout_weight="0.2" />
         </LinearLayout>
     </RelativeLayout>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
