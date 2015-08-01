@@ -1,5 +1,6 @@
 package com.z1911.thinyoutube;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,8 @@ import com.z1911.thinyoutube.Network.Const;
 import com.z1911.thinyoutube.Network.IYoutubeService;
 
 import retrofit.RestAdapter;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends FragmentActivity {
@@ -25,6 +28,20 @@ public class MainActivity extends FragmentActivity {
 
         CreateApiClient();
         ManageFragments();
+        InitializeFont();
+    }
+
+    private void InitializeFont() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/minimal_one.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 
