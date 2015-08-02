@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.z1911.thinyoutube.Fragments.YoutubeListFragment;
 import com.z1911.thinyoutube.Network.Const;
 import com.z1911.thinyoutube.Network.IYoutubeService;
@@ -26,12 +29,34 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CreateApiClient();
-        ManageFragments();
-        InitializeFont();
+        createApiClient();
+        loadYoutubeListFragment();
+        loadYoutubePlayerFragment("lMC8XYX5Ot0");
+        initializeFont();
     }
 
-    private void InitializeFont() {
+    private void loadYoutubePlayerFragment(final String videoId){
+        YouTubePlayerSupportFragment fragment = new YouTubePlayerSupportFragment();
+        fragment.initialize(Const.API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.loadVideo(videoId);
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.playerContainer, fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void initializeFont() {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                         .setDefaultFontPath("fonts/minimal_one.ttf")
                         .setFontAttrId(R.attr.fontPath)
@@ -72,16 +97,16 @@ public class MainActivity extends FragmentActivity {
     // you want to use the same images.
 
 
-    private void ManageFragments() {
+    private void loadYoutubeListFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         YoutubeListFragment fragment = new YoutubeListFragment();
-        fragmentTransaction.add(R.id.container, fragment);
+        fragmentTransaction.add(R.id.listContainer, fragment);
         fragmentTransaction.commit();
     }
 
-    private void CreateApiClient() {
+    private void createApiClient() {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(Const.Youtube)
                 .build();
